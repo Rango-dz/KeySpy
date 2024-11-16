@@ -30,7 +30,7 @@ class DataHandler:
         payload = {"log_data": data}
 
         try:
-            response = requests.post(self.remote_url, json=payload, headers=headers)
+            response = requests.post(self.remote_url, json=payload, headers=headers, timeout=60)
             response.raise_for_status()
             print("Remote log sent successfully.")
         except requests.RequestException as e:
