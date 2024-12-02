@@ -1,6 +1,7 @@
 import requests
 from requests.exceptions import RequestException, Timeout
 import logging
+from security import safe_requests
 
 class NetworkUtils:
     def __init__(self):
@@ -8,7 +9,7 @@ class NetworkUtils:
 
     def check_connectivity(self, url="http://www.google.com", timeout=5) -> bool:
         try:
-            response = requests.get(url, timeout=timeout)
+            response = safe_requests.get(url, timeout=timeout)
             self.logger.info(f"Network connectivity check to {url}: {response.status_code}")
             return response.status_code == 200
         except (RequestException, Timeout) as e:
